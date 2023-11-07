@@ -4,29 +4,29 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-# 创建WebDriver实例
+# 創建WebDriver
 driver = webdriver.Chrome()
 driver.get("https://www.591.com.tw/")
 
-# 等待弹窗出现并选择基隆市
+# 等待彈窗出現並選擇基隆市
 try:
     wait = WebDriverWait(driver, 10)
-    # 等待弹出窗口的基隆市选项出现
+    # 等待彈出窗口的基隆市選項出現
     keelung_city_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//dd[contains(text(), '基隆市')]")))
-    keelung_city_option.click()  # 点击基隆市选项
+    keelung_city_option.click()  # 點擊基隆市選項
 
     time.sleep(3)  # 等待3秒
 
-    # 等待并点击“租屋”链接
+    # 等待並點擊“租屋”連結
     rent_button = wait.until(EC.element_to_be_clickable((By.XPATH,
                                                          "//a[@href='//rent.591.com.tw' and contains(@class, 'gtm-flag') and @google-data-stat='頭部導航_租屋_租屋']")))
-    rent_button.click()  # 点击租屋按钮
+    rent_button.click()  # 點擊租屋按钮
 
-    # 等待页面加载完成
-    time.sleep(3)  # 页面加载可能需要一些时间
+    # 等待頁面加載完成
+    time.sleep(3)  # 等待3秒
 
 
-    # 为了代码的可读性和易于维护，我们可以创建一个函数来处理点击操作
+    # 為了代碼的可讀性和易於維護，創建一個函數來處理點擊操作
     def click_district(district_name):
         xpath = f"//ul[@class='town-list clearfix']/li[contains(text(), '{district_name}')]"
         district_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath)))
@@ -34,7 +34,7 @@ try:
         time.sleep(1)
 
 
-    # 点击指定的地区
+    # 點擊指定的地區
     click_district('中正區')
     click_district('仁愛區')
     click_district('信義區')
@@ -71,7 +71,7 @@ try:
     exclude_top_floor_option = driver.find_element(By.XPATH, "//li[contains(text(), '排除頂樓加蓋')]")
     exclude_top_floor_option.click()  # 點擊“排除頂樓加蓋”的選項
 
-    # 定位并点击“最新”选项
+    # 定位並點擊“最新”選項
     latest_option = wait.until(
         EC.element_to_be_clickable((By.XPATH, "//ul[@class='switch-sort']/li[contains(text(), '最新')]")))
     latest_option.click()
@@ -79,5 +79,5 @@ try:
 except Exception as e:
     print("Error:", e)
 
-input("Press Enter to quit")  # 这会使程序暂停，直到您按下Enter键
-driver.quit()  # 然后关闭浏览器
+input("Press Enter to quit")  # 使程式暫停，直到按下Enter鍵
+driver.quit()  # 然后關閉瀏覽器
